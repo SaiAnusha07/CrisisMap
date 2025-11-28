@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Request Statistics</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/ngo/dashboard">CrisisMap</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+					<li class="nav-item">
+					                        <a class="nav-link" href="/ngodashboard">Home</a>
+					                    </li>
+					                    <li class="nav-item">
+					                        <a class="nav-link active" href="/ngoReports">Reports</a>
+					                    </li>
+										<li class="nav-item">
+										    <a class="nav-link" href="/ngo/serviceRequests">Service Requests</a>
+										                    </li>
+										                    <li class="nav-item">
+										                        <a class="nav-link" href="/ngo/serviceStats">Service Stats</a>
+										                    </li>
+					                    
+					                    <li class="nav-item">
+					                        <a class="nav-link" href="/ngoResources">Resources</a>
+					                    </li>
+					                    <li class="nav-item">
+					                        <a class="nav-link" href="/ngoRequests">Requests</a>
+					                    </li>
+					                    <li class="nav-item">
+					                        <a class="nav-link" href="/ngoTasks">Tasks</a>
+											</li>
+										<li class="nav-item">
+								<a class="nav-link" href="/vdata">Volunteer Data</a>
+								</li>  
+										
+					                    <li class="nav-item">
+					                        <a class="nav-link" href="/ngoNotifications">Notifications</a>
+					                    </li>
+					                    <li class="nav-item">
+					                        <a class="nav-link" href="/logout">Logout</a>
+					                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Service Request Statistics</h2>
+                <div class="row mt-4">
+                    <div class="col-md-3">
+                        <div class="card bg-primary text-white">
+                            <div class="card-body">
+                                <h5 class="card-title">Total Requests</h5>
+                                <p class="card-text display-4" th:text="${totalRequests}">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-warning text-white">
+                            <div class="card-body">
+                                <h5 class="card-title">Pending Requests</h5>
+                                <p class="card-text display-4" th:text="${pendingRequests}">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-info text-white">
+                            <div class="card-body">
+                                <h5 class="card-title">Accepted Requests</h5>
+                                <p class="card-text display-4" th:text="${acceptedRequests}">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-success text-white">
+                            <div class="card-body">
+                                <h5 class="card-title">Completed Requests</h5>
+                                <p class="card-text display-4" th:text="${completedRequests}">0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-5">
+                    <h3>All Service Requests</h3>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Service Type</th>
+                                    <th>Description</th>
+                                    <th>Location</th>
+                                    <th>Status</th>
+                                    <th>Created By</th>
+                                    <th>Volunteers Accepted</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="request : ${requests}">
+                                    <td th:text="${request.serviceType}"></td>
+                                    <td th:text="${request.description}"></td>
+                                    <td th:text="${request.location}"></td>
+                                    <td th:text="${request.status}"></td>
+                                    <td th:text="${request.requestedBy}"></td>
+                                    <td th:text="${request.volunteersAccepted + ' / ' + request.volunteersNeeded}"></td>
+                                    <td th:text="${#temporals.format(request.requestDateTime, 'dd-MM-yyyy HH:mm')}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
