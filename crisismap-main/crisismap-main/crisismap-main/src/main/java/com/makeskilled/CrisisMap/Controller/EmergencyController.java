@@ -73,7 +73,7 @@ public class EmergencyController {
      * Utility method to get latitude and longitude from an address using Google Maps Geocoding API
      */
     private double[] getLatLngFromAddress(String address) throws Exception {
-        String apiKey = "AIzaSyAE7q8SO4MaBu0AsBqvA6qUdBpw4L728o0"; // Replace with your actual API key
+        String apiKey =  // Replace with your actual API key
         String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + 
                     URLEncoder.encode(address, StandardCharsets.UTF_8) + "&key=" + apiKey;
 
